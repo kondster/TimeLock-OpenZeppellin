@@ -1,7 +1,7 @@
 pragma solidity >=0.4.22 <0.9.0;
-import "@openzeppelin-contracts/contracts/access/Ownable.sol";
-import "@openzeppelin-contracts/contracts/token/ERC20/ERC20.sol";
-import "@openzeppelin-contracts/contracts/utils/math/SafeMath.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
+import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 
 contract LockingContract is Ownable {
     using SafeMath for uint256;
@@ -16,7 +16,7 @@ contract LockingContract is Ownable {
         return false;
     }
 
-    function LockingContract(ERC20 _tokenContract, uint256 _lockingDuration) public {
+    constructor LockingContract(ERC20 _tokenContract, uint256 _lockingDuration) public {
         tokenContract = _tokenContract;
     }
 
