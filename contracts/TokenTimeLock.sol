@@ -13,7 +13,7 @@ import "./BEP20-XTT-Contract.sol";
  * after 1 year".
  */
 contract TokenTimelock {
-    using BEP20Token for IBEP20;
+    using BEP20-XTT-Contract for IBEP20;
 
     // ERC20 basic token contract being held
     IBEP20 private immutable _token;
@@ -60,10 +60,10 @@ contract TokenTimelock {
      * @notice Transfers tokens held by timelock to beneficiary.
      */
     function release() public virtual {
-        require(block.timestamp >= releaseTime(), "TokenTimelock: current time is before release time");
+        require(block.timestamp >= releaseTime(), "TokenTimeLock: current time is before release time");
 
         uint256 amount = token().balanceOf(address(this));
-        require(amount > 0, "TokenTimelock: no tokens to release");
+        require(amount > 0, "TokenTimeLock: no tokens to release");
 
         token().safeTransfer(beneficiary(), amount);
     }
