@@ -2,7 +2,8 @@
 
 pragma solidity ^0.8.0;
 
-import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
+//import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
+import "./BEP20-XTT-Contract.sol";
 
 /**
  * @dev A token holder contract that will allow a beneficiary to extract the
@@ -12,10 +13,10 @@ import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
  * after 1 year".
  */
 contract TokenTimelock {
-    using SafeERC20 for IERC20;
+    using BEP20Token for IBEP20;
 
     // ERC20 basic token contract being held
-    IERC20 private immutable _token;
+    IBEP20 private immutable _token;
 
     // beneficiary of tokens after they are released
     address private immutable _beneficiary;
@@ -24,11 +25,11 @@ contract TokenTimelock {
     uint256 private immutable _releaseTime;
 
     constructor(
-        IERC20 token_,
+        IBEP20 token_,
         address beneficiary_,
         uint256 releaseTime_
     ) {
-        require(releaseTime_ > block.timestamp, "TokenTimelock: release time is before current time");
+        require(releaseTime_ > block.timestamp, "TokenTimeLock: release time is before current time");
         _token = token_;
         _beneficiary = beneficiary_;
         _releaseTime = releaseTime_;
@@ -37,7 +38,7 @@ contract TokenTimelock {
     /**
      * @return the token being held.
      */
-    function token() public view virtual returns (IERC20) {
+    function token() public view virtual returns (IBEP20) {
         return _token;
     }
 
